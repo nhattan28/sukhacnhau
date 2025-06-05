@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>So sánh</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <h2>So sánh văn bản</h2>
+
+  <div class="top-bar">
+    <textarea id="text1" placeholder="Nhập hoặc dán văn bản 1 tại đây..."></textarea>
+    <textarea id="text2" placeholder="Nhập hoặc dán văn bản 2 tại đây..."></textarea>
+    <div class="button-group">
+      <button onclick="compareTexts()">So sánh</button>
+      <button onclick="clearTexts()">Xóa</button>
+      <button onclick="window.location.href='index.html'">Trang chủ</button>
+
+    </div>
+  </div>
+
+  <div id="compareResult">
+    <div class="compare-container">
+      <div class="compare-box" id="result1"></div>
+      <div class="compare-box" id="result2"></div>
+    </div>
+  </div>
+
+  <script>
+    function compareTexts() {
+      const text1 = document.getElementById("text1").value.split(/\r?\n/);
+      const text2 = document.getElementById("text2").value.split(/\r?\n/);
+
+      const maxLines = Math.max(text1.length, text2.length);
+      const result1 = [];
+      const result2 = [];
+
+      for (let i = 0; i < maxLines; i++) {
+        const line1 = text1[i] || "";
+        const line2 = text2[i] || "";
+        if (line1.trim() !== line2.trim()) {
+          result1.push(`<div class="highlight">${line1}</div>`);
+          result2.push(`<div class="highlight">${line2}</div>`);
+        } else {
+          result1.push(`<div>${line1}</div>`);
+          result2.push(`<div>${line2}</div>`);
+        }
+      }
+
+      document.getElementById("result1").innerHTML = result1.join("");
+      document.getElementById("result2").innerHTML = result2.join("");
+    }
+
+    function clearTexts() {
+      document.getElementById("text1").value = "";
+      document.getElementById("text2").value = "";
+      document.getElementById("result1").innerHTML = "";
+      document.getElementById("result2").innerHTML = "";
+    }
+  </script>
+</body>
+</html>
