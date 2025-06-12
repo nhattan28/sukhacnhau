@@ -16,6 +16,9 @@
       <button onclick="compareTexts()">So sánh</button>
       <button onclick="clearTexts()">Xóa</button>
       <button onclick="window.location.href='index.html'">Trang chủ</button>
+      <button onclick="toggleDifferences(true)">Chỉ hiện khác nhau</button>
+      <button onclick="toggleDifferences(false)">Hiện tất cả</button>
+
 
     </div>
   </div>
@@ -58,6 +61,16 @@
       document.getElementById("result1").innerHTML = "";
       document.getElementById("result2").innerHTML = "";
     }
+    function toggleDifferences(showOnly) {
+    const boxes = document.querySelectorAll('.compare-box');
+    boxes.forEach(box => {
+    Array.from(box.children).forEach(div => {
+      const isDiff = div.classList.contains('highlight');
+      div.style.display = showOnly && !isDiff ? 'none' : '';
+    });
+  });
+}
+
   </script>
 </body>
 </html>
